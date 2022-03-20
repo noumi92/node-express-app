@@ -1,13 +1,15 @@
 ///import required node modules for server
 const express = require('express');
 const http = require('http');
+const morgan = require('morgan');
 ///pre-configuration for server
 const hostname = 'localhost';
 const port = 3000;
 const app = express();
+app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
 ///setup the http server
 app.use((request, response, next) => {
-    console.log(request.headers);
     response.statusCode = 200;
     response.setHeader('Content-Type', 'text/html');
     response.end("<html><body><h1>Express Server</h1></body></html>")
